@@ -1,41 +1,56 @@
 package model;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+public class CarteJeu {
 
-/**
- * Servlet implementation class CarteJeu
- */
-@WebServlet("/CarteJeu")
-public class CarteJeu extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CarteJeu() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+		private int id;
+		private int valeurbase;
+		private String recto;
+		private int verso;
+		private String couleur;
+		
+		public CarteJeu(int id, int valeurbase, String recto, int verso, String couleur) {
+			this.id = id;
+			this.valeurbase = valeurbase;
+			this.recto = recto;
+			this.verso = verso;
+			this.couleur = couleur;
+		}
+		
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public int getValeurbase() {
+			return valeurbase;
+		}
+		public void setValeur(int valeurbase) {
+			this.valeurbase = valeurbase;
+		}
+		public String getRecto() {
+			return recto;
+		}
+		public void setRecto(String recto) {
+			this.recto = recto;
+		}
+		public int getVerso() {
+			return verso;
+		}
+		public void Verso(int verso) {
+			this.verso = verso;
+		}
+		public String getCouleur() {
+			return couleur;
+		}
+		public void setCouleur(String couleur) {
+			this.couleur = couleur;
+		}
+		/*public CarteJeu tirage() {
+			
+			
+			return CarteJeu;
+		}*/
 }
+
+
