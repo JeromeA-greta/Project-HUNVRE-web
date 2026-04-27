@@ -1,40 +1,73 @@
 package model;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+public class Utilisateur {
 
-/**
- * Servlet implementation class Utilisateur
- */
-@WebServlet("/Utilisateur")
-public class Utilisateur extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private String pseudo;
+    private String mail;
+    private String mdp;
+    private DeckJoueur deck;
+    private String role = "joueur";
 
-    /**
-     * Default constructor. 
-     */
-    public Utilisateur() {
-        // TODO Auto-generated constructor stub
+
+    // 2026-04-13 - Vitally Lubin
+    // Ajout de l'attribut score pour stocker le score de la partie en cours.
+    // Cet attribut est alimenté par ZoneSeb via setScore() à chaque combinaison jouée.
+    // Il est lu par EcranDeFin via getScore() pour afficher le score final.
+    // Il est sauvegardé en BDD par ControleurEcranDeFin.sauvegarderScore() en fin de partie.
+    private int score = 0;
+
+    public Utilisateur(String pseudo, String mail, DeckJoueur deck, String role) {
+        this.pseudo = pseudo;
+        this.mail = mail;
+        this.deck = deck;
+        this.role = role;
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    public String getPseudo() {
+        return pseudo;
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    // set et get pour mdp ?? -pauline
+    // TODO : implémenter getter/setter pour mdp
+
+    public DeckJoueur getDeck() {
+        return deck;
+    }
+
+    public void setDeck(DeckJoueur deck) {
+        this.deck = deck;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    // 2026-04-13 - Vitally Lubin
+    // Getter et setter pour le score
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+    public void cumulscore (int score) { //Permet d'augmenter le score total du joueur à mesure que la partie avance dans le but de l'enregistrer en BDD à la fin
+    	this.score = this.score + score;
+    }
 }
