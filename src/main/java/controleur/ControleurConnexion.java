@@ -42,8 +42,9 @@ public class ControleurConnexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		   
-		// Si l'utilisateur a cliqué sur le bouton Connexion
-		if (request.getParameter(/*nom du formulaire*/)) {
+		// Si l'utilisateur-ice a cliqué sur le bouton Connexion
+		if ("connexion".equals(request.getParameter("connexion"))) { //ENLEVER ce If si PAS de vue CreationCompte !!!
+			
 			//récupérer l'identifiant et le mot de passe entrés par l'utilisateur-ice dans la vue Connexion
 			String identifiantCheck = (String)request.getParameter("identifiantCo"); //identifiantCo a changé selon le nom de la variable dans Connexion	
 			String mdpCheck = (String)request.getParameter("mdpCo"); // idem
@@ -56,17 +57,17 @@ public class ControleurConnexion extends HttpServlet {
 			
 			else {
 				//Ouvre la connexion
-				DAOAcces dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "webadherents", "root", ""); //normal Seb a pas encore push
+				DAOAcces dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "hunvre", "root", "");
 				Connection conn = null;
 				PreparedStatement checkUser = null;
 				
 				try {
 					conn = dao.getConn();
-					conn.setAutoCommit(false);
+					conn.setAutoCommit(false); //Transaction
 					
 					String sql = "SELECT * FROM utilisateur WHERE mail = ? AND mdp = ?";
 					checkUser = conn.prepareStatement(sql);
-					checkUser.setString(1, nameCheck);
+					checkUser.setString(1, identifiantCheck);
 					checkUser.setString(2,  mdpCheck);
 					ResultSet identification = checkUser.executeQuery();
 					
@@ -90,20 +91,25 @@ public class ControleurConnexion extends HttpServlet {
 	        							1,
 	        							rsprofil.getString(4)));
 	                		}
-		
+	                		h.setAttribute("joueur", joueur);
+	                	} finally {
+	            			
+	       				 dao.closeConnection();		
+	       				}
 					}
 					
 				} catch (SQLException e) {
 					e.printStackTrace();
 					System.out.println("Pb connexion SQL");		
-				}
-			
-				 dao.closeConnection();				 
+				
+				 
 				 response.sendRedirect("/Accueil");
 			}
+		
 		}
 	
 	
+	 // creationcompte if ("creation.eaquals(request.getParameter("creation"){}
 	
 	
 	
@@ -118,7 +124,7 @@ public class ControleurConnexion extends HttpServlet {
 	
 	
 	
-	
+			}
 	}
 
 	/**
