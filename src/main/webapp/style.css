@@ -40,4 +40,16 @@ input[name='choix'] {
 
 body {
 	background-image: url("resources/images/accueil.jpg");
+	color: white;
 }
+
+/*ALLAN
+
+#fondprofil {
+	background-image : url("accueil.jpg");
+}
+
+#tableauprofil {
+	color: white;
+}
+/*FIN ALLAN
