@@ -18,37 +18,39 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 
 
-@WebServlet("/accueil")
+@WebServlet("/ControleurAccueil")
 	public class ControleurAccueil extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int direction = Integer.parseInt(request.getParameter("direction"));
+        //int direction = Integer.parseInt(request.getParameter("direction"));
+    	String direction = request.getParameter("direction");
 
         switch (direction) {
 
-            case 1:
+            case "Profil":
                 // Profil
                 request.getRequestDispatcher("/profil.jsp")
                        .forward(request, response);
                 break;
 
-            case 2:
+            case "Nouvelle partie":
                 // Lancer partie
                 lancerPartie(request, response);
                 break;
 
-            case 3:
+            case "Scores":
                 // Scores
                 afficherScores(request, response);
                 break;
 
-            case 4:
+            case "Quitter":
                 // Quitter (logout)
                 request.getSession().invalidate();
                 //response.sendRedirect("index.jsp");
-                response.sendRedirect("/Connexion");
+                //response.sendRedirect("/Connexion");
+                request.getRequestDispatcher("/Connexion");
                 break;
         }
     }
