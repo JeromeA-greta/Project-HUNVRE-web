@@ -24,11 +24,14 @@ public class Accueil extends HttpServlet {
 						+ "</head>"
 						+ "<body>";
 	String htmlBody = "<h2 id='titre' align='center'>Bonjour Michel</h2>"
-					+ "<div class='centrage centrage-vertical'>"
+					+ "<div class='centrage centrage-xy'>"
 						+ "<form action='ControleurAccueil' method='get'>"
 				//Jérome : je n'ai pas mis les boutons Profil et Tableau des scores pour le moment
-							+ "<input type='submit' name='choix' value='Nouvelle partie'>"
-							+ "<input type='submit' name='choix' value='Quitter'>"
+							+ "<table><tr>"
+							+ "<td><input type='submit' name='direction' value='Nouvelle partie'></td>"
+							+ "<td style='width: 15px;'></td>"
+							+ "<td><input type='submit' name='direction' value='Quitter'></td>"
+							+ "</tr></table>"
 						+ "</form>"
 					+ "</div>";
 	
