@@ -60,13 +60,11 @@ public class ControleurConnexion extends HttpServlet {
 			else {
 				//Ouvre la connexion
 				DAOAcces dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "hunvre", "root", "");
-				Connection conn = null;
 				PreparedStatement checkUser = null;
 				System.out.println("on est dans le else de controleur co");
 				
 				try {
-					conn = dao.getConn();
-					conn.setAutoCommit(false); //Transaction
+					Connection conn = dao.getConn();
 					
 					String sql = "SELECT * FROM utilisateur WHERE mail = ? AND mdp = ?";
 					checkUser = conn.prepareStatement(sql);
@@ -75,6 +73,7 @@ public class ControleurConnexion extends HttpServlet {
 					ResultSet identification = checkUser.executeQuery();
 					
 					System.out.println(sql);
+					
 					
 					if (identification.next()) {
 						
@@ -89,28 +88,31 @@ public class ControleurConnexion extends HttpServlet {
 	                		
 	                		ResultSet rsprofil = pstprofil.executeQuery();
 	                		if (rsprofil.next()) {
-	                			joueur.getDeck().add(new CarteJeu(
+	                			joueur.getDeck().ajoutercarte(new CarteJeu(
 	        							rsprofil.getInt(1),
 	        							rsprofil.getInt(2),
 	        							rsprofil.getString(3),
 	        							1,
 	        							rsprofil.getString(4)));
 	                		}
-	                		h.setAttribute("joueur", joueur);
-	                	} finally {
-	            			
-	       				 dao.closeConnection();		
-	       				}
+	                	h.setAttribute("joueur", joueur);
+	                	} 
+	                	
+	                	catch (SQLException e) {
+	    					e.printStackTrace();
+	    					System.out.println("Pb connexion SQL utilisateur");
+	                  	}
 					}
 					
-				} catch (SQLException e) {
-					e.printStackTrace();
-					System.out.println("Pb connexion SQL");		
+				} 
 				
-				 
-				 response.sendRedirect("/Accueil");
-				 System.out.println("redirection accueil ok");
-			}
+				catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("Pb connexion SQL deck");		
+				}
+			dao.closeConnection();	
+			getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
+			System.out.println("redirection accueil ok");
 		
 		}	
 	
