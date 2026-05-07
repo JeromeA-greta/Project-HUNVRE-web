@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.*;
 
-// Servlet codée par Vitally - 7 mai 2026
+// Servlet Connexion codée par Vitally - 7 mai 2026 - matin
 
 /**
  * Servlet implementation class Connexion
@@ -24,7 +24,7 @@ public class Connexion extends HttpServlet {
 			PrintWriter out = response.getWriter(); // Ouvre le flux d'écriture vers le navigateur
 			
 	        out.println("<!DOCTYPE html>"
-	                + "<html lang='fr'><head><meta charset='utf-8'>" // En-tête HTML, encodage UTF-8 pour les accents
+	                + "<html lang='fr'><head><meta charset='utf-8'><link rel=\"stylesheet\" href=\"style.css\">" // En-tête HTML, encodage UTF-8 pour les accents, CSS
 	                
 	                // --- Titre ---
 	                + "<title>HUNVRE Connexion</title></head>"
