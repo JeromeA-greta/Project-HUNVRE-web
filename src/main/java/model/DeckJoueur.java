@@ -1,41 +1,35 @@
 package model;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Servlet implementation class DeckJoueur
- */
-@WebServlet("/DeckJoueur")
-public class DeckJoueur extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeckJoueur() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+public class DeckJoueur extends ArrayList {
+	
+	private List<CarteJeu> deck;
+	
+	public DeckJoueur() {
+	
+			this.deck = new ArrayList<CarteJeu>();	
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
+	public ArrayList getListedeck() { 
+		return (ArrayList) this.deck;
+	}
+	/*public CarteJeu getCartedejeubyid(int id) {
+		Cartedejeu.getId();
+	}*/
+	
+	public CarteJeu cherchercarte(int id) {
+		for (CarteJeu carte : this.deck) {
+			if (carte.getId() == id) {
+				return carte;
+			}
+		}
+		return null;
+	}
+	
+	public void ajoutercarte(CarteJeu c) { // Surcharge de la méthode add() de ArrayList
+		this.add(c);
 	}
 
 }

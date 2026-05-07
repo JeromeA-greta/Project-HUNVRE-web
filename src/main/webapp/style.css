@@ -1,0 +1,55 @@
+@charset "UTF-8";
+div {
+	text-align: center;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#titre {
+	color: #fff;
+}
+
+.centrage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+
+/*
+	centrage-xy permet de centrer tout élément ayant cette classe sur les axes X et Y
+	
+*/
+.centrage-xy {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+input[name='choix'] {
+	margin: 8px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+body {
+	background-image: url("resources/images/accueil.jpg");
+	color: white;
+}
+
+/*ALLAN
+
+#fondprofil {
+	background-image : url("accueil.jpg");
+}
+
+#tableauprofil {
+	color: white;
+}
+/*FIN ALLAN
