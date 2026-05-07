@@ -8,6 +8,16 @@ div {
 	margin-bottom: auto;
 }
 
+@font-face {
+	font-family: 'blur';
+	
+	src: url('resources/font/Gaussian_Blur.ttf') format('truetype');
+		
+    font-weight: normal;
+	
+    font-style: normal;
+}
+
 #titre {
 	color: #fff;
 }
@@ -41,15 +51,20 @@ input[name='choix'] {
 body {
 	background-image: url("resources/images/accueil.jpg");
 	color: white;
+	font-family: 'blur', sans-serif;
+	
+	
 }
 
 /*ALLAN
 
 #fondprofil {
-	background-image : url("accueil.jpg");
+	background-image : url("resources/images/accueil.jpg");
 }
 
 #tableauprofil {
 	color: white;
 }
+
+
 /*FIN ALLAN
