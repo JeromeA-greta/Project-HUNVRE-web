@@ -1,55 +1,83 @@
 @charset "UTF-8";
+
+/* Centrage horizontal des div + vertical via margin auto */
 div {
-	text-align: center;
-	vertical-align: middle;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: auto;
-	margin-bottom: auto;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
+/* Titre en blanc */
 #titre {
-	color: #fff;
+    color: #fff;
 }
 
+/* Centrage horizontal avec flexbox */
 .centrage {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-
-/*
-	centrage-xy permet de centrer tout élément ayant cette classe sur les axes X et Y
-	
-*/
+/* Centrage absolu sur les axes X et Y */
 .centrage-xy {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%); /* Compatibilité IE */
+    transform: translate(-50%, -50%);
 }
 
+/* Espacement des boutons radio/checkbox nommés 'choix' */
 input[name='choix'] {
-	margin: 8px;
-	margin-left: 20px;
-	margin-right: 20px;
+    margin: 8px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
+/* Image de fond sur toute la page, texte blanc par défaut */
 body {
-	background-image: url("resources/images/accueil.jpg");
-	color: white;
+    background-image: url("resources/images/accueil.jpg");
+    color: white;
 }
 
-/*ALLAN
+/* CONNEXION - Vitally */
+
+/* Formulaire centré, colonne, largeur max 350px */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 350px;
+    gap: 10px;
+    padding: 20px;
+}
+
+/* Champs email et mot de passe limités à 200px */
+input[type='email'],
+input[type='password'] {
+    max-width: 200px;
+    width: 100%;
+}
+
+/* Boutons limités à 200px */
+button {
+    max-width: 200px;
+    width: 100%;
+}
+
+/*ALLAN*/
 
 #fondprofil {
-	background-image : url("accueil.jpg");
+    background-image : url("accueil.jpg");
 }
 
 #tableauprofil {
-	color: white;
+    color: white;
 }
-/*FIN ALLAN
+
+/*FIN ALLAN*/
