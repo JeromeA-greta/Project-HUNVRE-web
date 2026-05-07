@@ -27,11 +27,18 @@ public class Accueil extends HttpServlet {
 					+ "<div class='centrage centrage-xy'>"
 						+ "<form action='ControleurAccueil' method='get'>"
 				//Jérome : je n'ai pas mis les boutons Profil et Tableau des scores pour le moment
-							+ "<table><tr>"
-							+ "<td><input type='submit' name='direction' value='Nouvelle partie'></td>"
-							+ "<td style='width: 15px;'></td>"
-							+ "<td><input type='submit' name='direction' value='Quitter'></td>"
-							+ "</tr></table>"
+							+ "<table>"
+								+ "<tr>"
+									+ "<td><input type='submit' name='direction' value='Nouvelle partie'></td>"
+									+ "<td style='width: 15px;'></td>"
+									+ "<td><input type='submit' name='direction' value='Profil'></td>"
+								+ "</tr>"
+								+ "<tr>"
+									+ "<td><input type='submit' name='direction' value='Tableau des scores'></td>"
+									+ "<td style='width: 15px;'></td>"
+									+ "<td><input type='submit' name='direction' value='Quitter'></td>"
+								+ "</tr>"
+							+ "</table>"
 						+ "</form>"
 					+ "</div>";
 	

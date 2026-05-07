@@ -55,6 +55,11 @@ form {
     max-width: 350px;
     gap: 10px;
     padding: 20px;
+	background-image: url("resources/images/accueil.jpg");
+	color: white;
+	font-family: 'blur', sans-serif;
+	
+	
 }
 
 /* Champs email et mot de passe limités à 200px */
