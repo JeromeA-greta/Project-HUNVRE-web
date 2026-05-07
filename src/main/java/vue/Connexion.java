@@ -32,27 +32,33 @@ public class Connexion extends HttpServlet {
 	                + "<body>"
 	                
 		                // --- Description ---
-		                + "<p>\"Un jeu inspiré de Balatro pour plonger\\ndans les profondeurs du rêve lucide.\"</p>"
+		                + "<p>\"Un jeu inspiré de Balatro pour plonger dans les profondeurs du rêve lucide.\"</p>"
 		                
-		                // --- Début formulaire méthode POST
-		                + "<form action='ControleurConnexion' method='POST'>" // Le formulaire envoie les données à la servlet ControleurConnexion en POST
+		                // --- Début formulaire méthode POST pour la connexion
+		                + "<form action=\"ControleurConnexion\" method=\"POST\">" // Le formulaire envoie les données à la servlet ControleurConnexion en POST
 		                
 		                // --- Champs de saisie avec labels ---		                
 		                // --- Adresse mail
 		                + "<label>Adresse email :</label><br>"
-		                + "<input type='email' name='labelEmail' placeholder= 'exemple@mail.com' /><br>" // Champ adresse mail — name='labelEmail' est la clé qu'on récupérera avec getParameter("labelEmail")
+		                + "<input type='email' name='labelEmail' placeholder='exemple@mail.com' ><br>" // Champ adresse mail — name='labelEmail' est la clé qu'on récupérera avec getParameter("labelEmail")
 		                
 		                // --- mot de passe
 		                + "<label>Mot de passe :</label><br>"
-		                + "<input type='password' name='mdp' placeholder='Votre mot de passe' /><br>" // Champ mot de passe — name='mdp' est la clé qu'on récupérera avec getParameter("mdp")
+		                + "<input type='password' name='mdp' placeholder='Votre mot de passe' ><br>" // Champ mot de passe — name='mdp' est la clé qu'on récupérera avec getParameter("mdp")
 		                
 		             	// --- Boutons ---
 		             	// --- Bouton Se connecter ---
-		                + "<button type='submit' name='connexion' >Se connecter</button>" // Bouton qui déclenche 
+		                + "<input type='submit' value='Se connecter'>" // Bouton qui déclenche 
+		                // --- Fin formulaire méthode POST pour la connexion
+		                + "</form><br>" 
+		               
+		                //Formulaire méthode GET pour la création de compte - modif pauline 7/05/26 14:38
+		                + "<form action='CreationCompte' method='GET'>"
+		                       
 		                // --- Bouton Créer un compte ---
-		                + "<button type='submit' name='creation' >Créer un compte</button>" // Bouton qui déclenche 
+		                + "<input type='submit' value='Créer un compte'>" // Bouton qui déclenche 
 		                
-		                // --- Fin formulaire méthode POST
+		                // --- Fin formulaire méthode GET
 		                + "</form>"
 	                
 	                + "</body></html>");

@@ -41,16 +41,18 @@ public class ControleurConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   
+		 
 		// Si l'utilisateur-ice a cliqué sur le bouton Connexion
-		if ("connexion".equals(request.getParameter("connexion"))) { //ENLEVER ce If si PAS de vue CreationCompte !!!
+		//if ("connexion".equals(request.getParameter("connexion"))) { //ENLEVER ce If si PAS de vue CreationCompte !!!
 			
 			//récupérer l'identifiant et le mot de passe entrés par l'utilisateur-ice dans la vue Connexion
-			String identifiantCheck = (String)request.getParameter("identifiantCo"); //identifiantCo a changé selon le nom de la variable dans Connexion	
-			String mdpCheck = (String)request.getParameter("mdpCo"); // idem
+			String mailCheck = (String)request.getParameter("labelEmail");	
+			String mdpCheck = (String)request.getParameter("mdp"); 
+			
+			System.out.println("controleur co instancié & pseudo : "+ mailCheck);
 			
 			//Si les champs sont vides, renvoie sur la vue Connexion (mais il manque l'affichage dans la vue Connewion d'un message d'erreur
-			if(identifiantCheck == null || identifiantCheck.trim().isEmpty() || mdpCheck == null || mdpCheck.trim().isEmpty())   {
+			if(mailCheck == null || mailCheck.trim().isEmpty() || mdpCheck == null || mdpCheck.trim().isEmpty())   {
 				getServletContext().getRequestDispatcher("/Connexion").forward(request, response);
 				System.out.println("Veuillez compléter tous les champs svp !");
 			}
@@ -60,6 +62,7 @@ public class ControleurConnexion extends HttpServlet {
 				DAOAcces dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "hunvre", "root", "");
 				Connection conn = null;
 				PreparedStatement checkUser = null;
+				System.out.println("on est dans le else de controleur co");
 				
 				try {
 					conn = dao.getConn();
@@ -67,9 +70,11 @@ public class ControleurConnexion extends HttpServlet {
 					
 					String sql = "SELECT * FROM utilisateur WHERE mail = ? AND mdp = ?";
 					checkUser = conn.prepareStatement(sql);
-					checkUser.setString(1, identifiantCheck);
+					checkUser.setString(1, mailCheck);
 					checkUser.setString(2,  mdpCheck);
 					ResultSet identification = checkUser.executeQuery();
+					
+					System.out.println(sql);
 					
 					if (identification.next()) {
 						
@@ -104,27 +109,13 @@ public class ControleurConnexion extends HttpServlet {
 				
 				 
 				 response.sendRedirect("/Accueil");
+				 System.out.println("redirection accueil ok");
 			}
 		
-		}
-	
-	
-	 // creationcompte if ("creation.eaquals(request.getParameter("creation"){}
+		}	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-			}
 	}
 
 	/**
