@@ -31,7 +31,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
             case "Profil":
                 // Profil
-                request.getRequestDispatcher("/profil.jsp")
+                request.getRequestDispatcher("/Profil")
                        .forward(request, response);
                 break;
 
