@@ -107,21 +107,17 @@ public class ControleurConnexion extends HttpServlet {
 	    					System.out.println("Pb connexion SQL utilisateur");
 	                  	}
 					}
-					
 				} 
 				
 				catch (SQLException e) {
 					e.printStackTrace();
 					System.out.println("Pb connexion SQL deck");		
 				}
+							
 			dao.closeConnection();	
 			getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
-			System.out.println("redirection accueil ok");
-		
+			System.out.println("redirection accueil ok");		
 		}	
-	
-	
-	
 	}
 
 	/**
