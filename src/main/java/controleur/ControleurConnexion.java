@@ -49,6 +49,7 @@ public class ControleurConnexion extends HttpServlet {
 			String mailCheck = (String)request.getParameter("labelEmail");	
 			String mdpCheck = (String)request.getParameter("mdp"); 
 			
+			//Test
 			System.out.println("controleur co instancié & pseudo : "+ mailCheck);
 			
 			//Si les champs sont vides, renvoie sur la vue Connexion (mais il manque l'affichage dans la vue Connewion d'un message d'erreur
@@ -61,6 +62,8 @@ public class ControleurConnexion extends HttpServlet {
 				//Ouvre la connexion
 				DAOAcces dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "hunvre", "root", "");
 				PreparedStatement checkUser = null;
+				
+				//Test
 				System.out.println("on est dans le else de controleur co");
 				
 				try {
@@ -69,9 +72,10 @@ public class ControleurConnexion extends HttpServlet {
 					String sql = "SELECT * FROM utilisateur WHERE mail = ? AND mdp = ?";
 					checkUser = conn.prepareStatement(sql);
 					checkUser.setString(1, mailCheck);
-					checkUser.setString(2,  mdpCheck);
+					checkUser.setString(2, mdpCheck);
 					ResultSet identification = checkUser.executeQuery();
 					
+					//Test
 					System.out.println(sql);
 					
 					
