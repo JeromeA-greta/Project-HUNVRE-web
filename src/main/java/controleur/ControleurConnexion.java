@@ -115,11 +115,11 @@ public class ControleurConnexion extends HttpServlet {
 				getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
 				System.out.println("redirection accueil ok");
 				}
-		
+							
+			dao.closeConnection();	
+			getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
+			System.out.println("redirection accueil ok");		
 		}	
-	
-	
-	
 	}
 
 	/**
