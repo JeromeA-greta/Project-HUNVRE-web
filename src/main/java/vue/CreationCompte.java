@@ -46,7 +46,7 @@ public class CreationCompte extends HttpServlet {
 	                // --- Champs de saisie avec labels ---
 	                // --- Pseudo ---
 	                + "<label>Pseudo :</label><br>"
-	                + "<input type='test' name='pseudo' placeholder='pseudo' ><br>" // Champ pseudo — name='pseudo' est la clé qu'on récupérera avec getParameter("pseudo")
+	                + "<input type='text' name='pseudo' placeholder='pseudo' ><br>" // Champ pseudo — name='pseudo' est la clé qu'on récupérera avec getParameter("pseudo")
 	                
 	                // --- Adresse mail
 	                + "<label>Adresse email :</label><br>"
@@ -55,15 +55,18 @@ public class CreationCompte extends HttpServlet {
 	                // --- mot de passe
 	                + "<label>Mot de passe :</label><br>"
 	                + "<input type='password' name='mdp' placeholder='Votre mot de passe' ><br>" // Champ mot de passe — name='mdp' est la clé qu'on récupérera avec getParameter("mdp")
-	                + "<input type='password' name='confirmMdp' placeholder='Confirmer votre mot de passe' ><br>"
+	                + "<input type='password' name='confirmMdp' placeholder='Confirmer votre mot de passe' ><br>"// Champ de confirmation de mot de passe — name='confirmMdp' est la clé qu'on récupérera avec getParameter("confirmMdp")
 	                
 	                // --- Bouton Créer un compte ---
 	                + "<input type='submit' value='Créer un compte'>" // Bouton qui déclenche l'instanciation du ControleurCreationCompte
 	                
 	                // --- Fin formulaire méthode GET
 	                + "</form>"
-                
-                + "</body></html>");
+
+	             // --- Affichage du message d'erreur si présent
+	             + (request.getAttribute("erreur") != null ? "<p style='color:red;'>" + request.getAttribute("erreur") + "</p>" : "")
+
+	             + "</body></html>");
 	
 	}
 

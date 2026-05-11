@@ -15,22 +15,6 @@ div {
     color: #fff;
 }
 
-/* Centrage horizontal avec flexbox */
-.centrage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-/* Centrage absolu sur les axes X et Y */
-.centrage-xy {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%); /* Compatibilité IE */
-    transform: translate(-50%, -50%);
-}
 
 /* Espacement des boutons radio/checkbox nommés 'choix' */
 input[name='choix'] {
@@ -45,47 +29,6 @@ body {
     color: white;
 }
 
-/* ============================================================
-   CONNEXION - Vitally
-   ============================================================ */
-
-/* Tableau du formulaire de connexion centré, largeur max 350px */
-#table-connexion {
-    margin: auto;
-    max-width: 350px;
-    padding: 20px;
-    font-family: 'blur', sans-serif;
-    color: white;
-}
-
-/* Cellules avec espacement */
-#table-connexion td {
-    padding: 5px 10px;
-}
-
-/* Champs email et mot de passe */
-#input-email,
-#input-mdp {
-    width: 200px;
-}
-
-/* Boutons connexion et création */
-#btn-connexion,
-#btn-creation {
-    width: 200px;
-}
-
-/* Formulaire création de compte */
-#form-creation {
-    margin: auto;
-    max-width: 350px;
-    padding: 5px 20px;
-    font-family: 'blur', sans-serif;
-}
-
-/* ============================================================
-   FIN CONNEXION - Vitally
-   ============================================================ */
 
 /*ALLAN*/
 
