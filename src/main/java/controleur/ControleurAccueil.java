@@ -37,7 +37,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
             case "Nouvelle partie":
                 // Lancer partie
-                lancerPartie(request, response);
+            	lancerPartie(request, response);
                 break;
 
             case "Tableau des scores":
@@ -79,7 +79,7 @@ import jakarta.servlet.http.HttpServletResponse;
             dao.closeConnection();
         }
 
-        request.getRequestDispatcher("/partie.jsp")
+        request.getRequestDispatcher("/Partie")
                .forward(request, response);
     }
 
