@@ -20,7 +20,6 @@ public class Scores extends HttpServlet {
 	ArrayList<String> pseudos = new ArrayList<>();
 	ArrayList<Integer> scores = new ArrayList<>();
 	
-	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -59,7 +58,6 @@ public class Scores extends HttpServlet {
 				+ "</div>"
 				+ "</body>"
 				+ "</html>";
-		
 		
 		response.getWriter().append(html);
 	}
