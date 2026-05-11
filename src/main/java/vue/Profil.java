@@ -26,15 +26,13 @@ public class Profil extends HttpServlet {
 		
 		PrintWriter out=response.getWriter();
 		
-		Utilisateur joueur = new Utilisateur("michel", "michel@michel", new DeckJoueur(), "admin");
-		
-		/*HttpSession h = request.getSession(false);
+		HttpSession h = request.getSession(false);
 		Utilisateur joueur = (Utilisateur) h.getAttribute("joueur");
 		
 		if (h == null || h.getAttribute("joueur") == null) { //Si la session n'existe pas, renvoie vers la page de connexion
 		    response.sendRedirect("/Connexion");
 		    return;
-		}*/
+		}
 		
 		out.print("<!Doctype html>"
 				+ "<html>"

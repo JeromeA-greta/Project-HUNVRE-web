@@ -37,20 +37,20 @@ import jakarta.servlet.http.HttpServletResponse;
 
             case "Nouvelle partie":
                 // Lancer partie
-                lancerPartie(request, response);
+            	lancerPartie(request, response);
                 break;
 
-            case "Scores":
+            case "Tableau des scores":
                 // Scores
                 afficherScores(request, response);
                 break;
 
             case "Quitter":
                 // Quitter (logout)
-                request.getSession().invalidate();
                 //response.sendRedirect("index.jsp");
                 //response.sendRedirect("/Connexion");
-                request.getRequestDispatcher("/Connexion");
+                request.getRequestDispatcher("/ControleurDeconnexion")
+                .forward(request, response);
                 break;
         }
     }
@@ -79,7 +79,7 @@ import jakarta.servlet.http.HttpServletResponse;
             dao.closeConnection();
         }
 
-        request.getRequestDispatcher("/partie.jsp")
+        request.getRequestDispatcher("/Partie")
                .forward(request, response);
     }
 
@@ -110,7 +110,7 @@ import jakarta.servlet.http.HttpServletResponse;
             dao.closeConnection();
         }
 
-        request.getRequestDispatcher("/scores.jsp")
+        request.getRequestDispatcher("/Scores")
                .forward(request, response);
     }
 }
