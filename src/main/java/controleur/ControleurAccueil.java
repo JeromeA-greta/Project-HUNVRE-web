@@ -40,7 +40,7 @@ import jakarta.servlet.http.HttpServletResponse;
                 lancerPartie(request, response);
                 break;
 
-            case "Scores":
+            case "Tableau des scores":
                 // Scores
                 afficherScores(request, response);
                 break;
@@ -110,7 +110,7 @@ import jakarta.servlet.http.HttpServletResponse;
             dao.closeConnection();
         }
 
-        request.getRequestDispatcher("/scores.jsp")
+        request.getRequestDispatcher("/Scores")
                .forward(request, response);
     }
 }
