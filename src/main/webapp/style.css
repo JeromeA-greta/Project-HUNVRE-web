@@ -56,6 +56,26 @@ body {
     color: white;
     font-style: 'blur';
 }
+ /*config transparence autour boutons - Seb*/
+ 
+.boutons {
+    text-align: center;
+    background: transparent;
+}
+
+.boutons form {
+    display: inline-block;
+    margin: 0 10px;
+    background: transparent !important;
+}
+
+.boutons input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 
 /* ============================================================
    CONNEXION - Vitally
