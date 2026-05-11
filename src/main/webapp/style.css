@@ -17,8 +17,8 @@ div {
 
 @font-face {
 	font-family :'blur';
-	src: local("resources/font/Gaussian_Blur.ttf") format("opentype"),
-	 	 local("resources/font/Gaussian_Blur.ttf") format("ttf");
+	src: url("resources/font/Gaussian_Blur.ttf") format("opentype"),
+	 	 url("resources/font/Gaussian_Blur.ttf") format("ttf");
 }
 
 /* Titre en blanc */
@@ -52,9 +52,10 @@ input[name='choix'] {
 
 /* Image de fond sur toute la page, texte blanc par défaut */
 body {
-    background-image: url("resources/images/accueil.jpg"); 
+   
     color: white;
     font-style: 'blur';
+    font-family: 'blur', sans-serif;
 }
 
 /* ============================================================
@@ -66,7 +67,7 @@ body {
     margin: auto;
     max-width: 350px;
     padding: 20px;
-    font-family: 'blur', sans-serif;
+ 
     color: white;
 }
 
@@ -102,7 +103,7 @@ body {
 /*ALLAN*/
 
 #fondprofil {
-    background-image: url("accueil.jpg");
+
 }
 
 #tableauprofil {
@@ -110,51 +111,63 @@ body {
     font-style: 'blur';
 }
 
-#00 {
+#case00 {
 	width : 17vw;
 	height : 29vh;
 	background-image: url("resources/images/lune.jpg");
+	background-size: cover;
 }
 
-#01 {
+#case01 {
+	background-image: url("resources/images/titre-hunvre.jpg");
 	width : 66vw;
 	height : 29vh;
 }
 
-#02 {
+#case02 {
 	width : 17vw;
 	height : 29vh;
 	background-image: url("resources/images/lune.jpg");
+	background-size: cover;
 }
 
-#10 {
+#case10 {
 	width : 17vw;
 	height : 42vh;
 }
 
-#11 {
+#case11 {
+	background-image: url("resources/images/bandomilieu4.jpg");
+
+	height : 42vh;
+}
+
+#case12 {
+	
+	width : 17vw;
+	height : 42vh;
+	
+}
+
+#case20 {
+	width : 17vw;
+	height : 29vh;
+	background-image: url("resources/images/lune.jpg");
+	background-size: cover;
+}
+
+#case21 {
 	width : 66vw;
-	height : 42vh;
+	height : 29vh;
+	background-image: url("resources/images/BandobaHunvre2.jpg");
+	background-size: cover;
 }
 
-#12 {
-	width : 17vw;
-	height : 42vh;
-}
-
-#20 {
+#case22 {
 	width : 17vw;
 	height : 29vh;
-}
-
-#21 {
-	width : 66vw;
-	height : 29vh;
-}
-
-#22 {
-	width : 17vw;
-	height : 29vh;
+	background-image: url("resources/images/lune.jpg");
+	background-size: cover;
 }
 
 
