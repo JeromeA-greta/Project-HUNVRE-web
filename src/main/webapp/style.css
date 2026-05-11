@@ -1,6 +1,9 @@
 @charset "UTF-8";
 
 /* Centrage horizontal des div + vertical via margin auto */
+
+
+
 div {
     text-align: center;
     vertical-align: middle;
@@ -8,6 +11,14 @@ div {
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+/* Définition de la police d'écriture personnalisée */
+
+@font-face {
+	font-family :'blur';
+	src: local("resources/font/Gaussian_Blur.ttf") format("opentype"),
+	 	 local("resources/font/Gaussian_Blur.ttf") format("ttf");
 }
 
 /* Titre en blanc */
@@ -41,8 +52,9 @@ input[name='choix'] {
 
 /* Image de fond sur toute la page, texte blanc par défaut */
 body {
-    background-image: url("resources/images/accueil.jpg");
+    background-image: url("resources/images/accueil.jpg"); 
     color: white;
+    font-style: 'blur';
 }
 
 /* CONNEXION - Vitally */
@@ -57,7 +69,7 @@ form {
     padding: 20px;
 	background-image: url("resources/images/accueil.jpg");
 	color: white;
-	font-family: 'blur', sans-serif;
+	font-style: 'blur', sans-serif;
 	
 	
 }
@@ -78,11 +90,60 @@ button {
 /*ALLAN*/
 
 #fondprofil {
-    background-image : url("accueil.jpg");
+   /* background-image : url("accueil.jpg");*/
 }
 
 #tableauprofil {
     color: white;
+    font-style: 'blur';
 }
+
+#00 {
+	width : 17vw;
+	height : 29vh;
+	background-image: url("resources/images/lune.jpg");
+}
+
+#01 {
+	width : 66vw;
+	height : 29vh;
+}
+
+#02 {
+	width : 17vw;
+	height : 29vh;
+	background-image: url("resources/images/lune.jpg");
+}
+
+#10 {
+	width : 17vw;
+	height : 42vh;
+}
+
+#11 {
+	width : 66vw;
+	height : 42vh;
+}
+
+#12 {
+	width : 17vw;
+	height : 42vh;
+}
+
+#20 {
+	width : 17vw;
+	height : 29vh;
+}
+
+#21 {
+	width : 66vw;
+	height : 29vh;
+}
+
+#22 {
+	width : 17vw;
+	height : 29vh;
+}
+
 
 /*FIN ALLAN*/
