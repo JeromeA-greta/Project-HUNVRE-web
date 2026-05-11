@@ -11,6 +11,7 @@ import model.DeckJoueur;
 import model.Utilisateur;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,84 +43,63 @@ public class ControleurConnexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
-		// Si l'utilisateur-ice a cliqué sur le bouton Connexion
-			//récupérer l'identifiant et le mot de passe entrés par l'utilisateur-ice dans la vue Connexion
+			//récupére l'identifiant et le mot de passe entrés par l'utilisateur-ice dans la vue Connexion
 			String mailCheck = (String)request.getParameter("labelEmail");	
 			String mdpCheck = (String)request.getParameter("mdp"); 
 			
 			//Test
-			System.out.println("controleur co instancié & pseudo : "+ mailCheck);
+			System.out.println("controleur co instancié & le mail entré est : "+ mailCheck);
 			
 			//Si les champs sont vides, renvoie sur la vue Connexion (mais il manque l'affichage dans la vue Connewion d'un message d'erreur
 			if(mailCheck == null || mailCheck.trim().isEmpty() || mdpCheck == null || mdpCheck.trim().isEmpty())   {
+				request.setAttribute("erreur", "Veuillez remplir tous les champs");
 				getServletContext().getRequestDispatcher("/Connexion").forward(request, response);
 				System.out.println("Veuillez compléter tous les champs svp !");
 			}
 			
-			else {
+			boolean redirectionOk = false;
+			DAOAcces dao = null;
+			
+			try {	
 				//Ouvre la connexion
-				DAOAcces dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "hunvre", "root", "");
+				dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "hunvre", "root", "");
 				PreparedStatement checkUser = null;
 				
-				//Test
-				System.out.println("on est dans le else de controleur co");
+				String sql = "SELECT * FROM utilisateur WHERE mail = ? AND mdp = ?";
+				checkUser = dao.getConn().prepareStatement(sql);
+				checkUser.setString(1, mailCheck);
+				checkUser.setString(2, mdpCheck);
+				ResultSet identification = checkUser.executeQuery();				
 				
-				try {					
-					String sql = "SELECT * FROM utilisateur WHERE mail = ? AND mdp = ?";
-					checkUser = dao.getConn().prepareStatement(sql);
-					checkUser.setString(1, mailCheck);
-					checkUser.setString(2, mdpCheck);
-					ResultSet identification = checkUser.executeQuery();
+				if (identification.next()) {
 					
-					//Test
-					System.out.println(sql);
+					//Crée la variable de session h seulement si la requête d'identification renvoie un résultat positif
+					HttpSession h = request.getSession();  
 					
-					
-					if (identification.next()) {
-						
-						//Crée la variable de session h seulement si la requête d'identification renvoie un résultat positif
-						HttpSession h = request.getSession();  
-						//
-						joueur = new Utilisateur(identification.getString("pseudo"), identification.getString("mail"),
-								new DeckJoueur(), identification.getString("role"));
-	                	// Récupération du deck sauvegardé
-	                	// Pour l'instant il n'y a pas de bouton pour reprendre une partie
-	                	try {
-	                		PreparedStatement pstprofil = dao.getConn().prepareStatement(
-	                				"SELECT * FROM deck_carte WHERE ref_utilisateur = ?");
-	                		pstprofil.setInt(1, identification.getInt(1));
-	                		
-	                		ResultSet rsprofil = pstprofil.executeQuery();
-	                		if (rsprofil.next()) {
-	                			joueur.getDeck().ajoutercarte(new CarteJeu(
-	        							rsprofil.getInt(1),
-	        							rsprofil.getInt(2),
-	        							rsprofil.getString(3),
-	        							1,
-	        							rsprofil.getString(4)));
-	                		}
-	                	h.setAttribute("joueur", joueur); // Place l'instance de Utilisateur "joueur" dans la variable de session h
-	                	} 
-	                	
-	                	catch (SQLException e) {
-	    					e.printStackTrace();
-	    					System.out.println("Pb connexion SQL deck");
-	                  	}
-					}
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
-					System.out.println("Pb connexion SQL utilisateur");		
-				} finally { //fermer la connexion, ferme les 2 try, les 2 connexions à la BDD
-				dao.closeConnection();	
-				getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
-				System.out.println("redirection accueil ok");
+					// instanciation de l'objet Utilisateur dans la variable joueur
+					joueur = new Utilisateur(identification.getString("pseudo"), identification.getString("mail"),
+							new DeckJoueur(), identification.getString("role"));
+                	
+					// Récupération du deck sauvegardé
+                   	chargerDeck(dao, identification);
+
+                	h.setAttribute("joueur", joueur); // Place l'instance de Utilisateur "joueur" dans la variable de session 
+                    redirectionOk = true;
 				}
-							
-			dao.closeConnection();	
-			getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
-			System.out.println("redirection accueil ok");		
-		}	
+
+			} catch (SQLException e) {
+			    e.printStackTrace();
+			    System.out.println("Pb connexion SQL - connexion échoué");
+			//fermer la connexion
+			} finally {
+			    dao.closeConnection();
+			    if (redirectionOk) {
+			        getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
+			    } else {
+			    	request.setAttribute("erreur", "Identifiants incorrects !");
+			        getServletContext().getRequestDispatcher("/Connexion").forward(request, response);
+			    }
+			}
 	}
 
 	/**
@@ -130,4 +110,27 @@ public class ControleurConnexion extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
+	private void chargerDeck(DAOAcces dao, ResultSet identification) throws SQLException {
+	    try {
+	    	PreparedStatement pstprofil = dao.getConn().prepareStatement(
+	        "SELECT * FROM carte;");
+	    
+	    	ResultSet rsprofil = pstprofil.executeQuery();
+	    	
+	    	while (rsprofil.next()) {
+	    		joueur.getDeck().ajoutercarte(new CarteJeu(
+	    				rsprofil.getInt(1),
+		            rsprofil.getInt(2),
+		            rsprofil.getString(3),
+		            1,
+		            rsprofil.getString(4)));
+	    		System.out.println("rsprofil" + rsprofil.getInt(1));
+		    }
+	    	System.out.println(joueur.getDeck());
+	    } catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Pb connexion SQL charger deck");
+        }
+	}
 }
