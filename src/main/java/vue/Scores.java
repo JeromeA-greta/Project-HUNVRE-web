@@ -41,7 +41,7 @@ public class Scores extends HttpServlet {
 				+ "<table>";
 				
 		// Affichage de chaque pseudo et score associé grâce à une boucle
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < scores.size(); i++) {
 			html += "<tr>"
 					+ "<td>" + pseudos.get(i) + "</td>"
 					+ "<td>" + scores.get(i) + "</td>"
