@@ -43,12 +43,11 @@ public class ControleurConnexion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 
 		// Si l'utilisateur-ice a cliqué sur le bouton Connexion
-		//if ("connexion".equals(request.getParameter("connexion"))) { //ENLEVER ce If si PAS de vue CreationCompte !!!
-			
 			//récupérer l'identifiant et le mot de passe entrés par l'utilisateur-ice dans la vue Connexion
 			String mailCheck = (String)request.getParameter("labelEmail");	
 			String mdpCheck = (String)request.getParameter("mdp"); 
 			
+			//Test
 			System.out.println("controleur co instancié & pseudo : "+ mailCheck);
 			
 			//Si les champs sont vides, renvoie sur la vue Connexion (mais il manque l'affichage dans la vue Connewion d'un message d'erreur
@@ -61,24 +60,28 @@ public class ControleurConnexion extends HttpServlet {
 				//Ouvre la connexion
 				DAOAcces dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "hunvre", "root", "");
 				PreparedStatement checkUser = null;
+				
+				//Test
 				System.out.println("on est dans le else de controleur co");
 				
-				try {
-					Connection conn = dao.getConn();
-					
+				try {					
 					String sql = "SELECT * FROM utilisateur WHERE mail = ? AND mdp = ?";
-					checkUser = conn.prepareStatement(sql);
+					checkUser = dao.getConn().prepareStatement(sql);
 					checkUser.setString(1, mailCheck);
-					checkUser.setString(2,  mdpCheck);
+					checkUser.setString(2, mdpCheck);
 					ResultSet identification = checkUser.executeQuery();
 					
+					//Test
 					System.out.println(sql);
 					
 					
 					if (identification.next()) {
 						
-						HttpSession h = request.getSession();  //Crée la session seulement si la requête d'identification renvoie un résultat positif
-						joueur = new Utilisateur(identification.getString("pseudo"), identification.getString("mail"), new DeckJoueur(), identification.getString("role"));
+						//Crée la variable de session h seulement si la requête d'identification renvoie un résultat positif
+						HttpSession h = request.getSession();  
+						//
+						joueur = new Utilisateur(identification.getString("pseudo"), identification.getString("mail"),
+								new DeckJoueur(), identification.getString("role"));
 	                	// Récupération du deck sauvegardé
 	                	// Pour l'instant il n'y a pas de bouton pour reprendre une partie
 	                	try {
@@ -95,29 +98,28 @@ public class ControleurConnexion extends HttpServlet {
 	        							1,
 	        							rsprofil.getString(4)));
 	                		}
-	                	h.setAttribute("joueur", joueur);
+	                	h.setAttribute("joueur", joueur); // Place l'instance de Utilisateur "joueur" dans la variable de session h
 	                	} 
 	                	
 	                	catch (SQLException e) {
 	    					e.printStackTrace();
-	    					System.out.println("Pb connexion SQL utilisateur");
+	    					System.out.println("Pb connexion SQL deck");
 	                  	}
 					}
 					
-				} 
-				
-				catch (SQLException e) {
+				} catch (SQLException e) {
 					e.printStackTrace();
-					System.out.println("Pb connexion SQL deck");		
+					System.out.println("Pb connexion SQL utilisateur");		
+				} finally { //fermer la connexion, ferme les 2 try, les 2 connexions à la BDD
+				dao.closeConnection();	
+				getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
+				System.out.println("redirection accueil ok");
 				}
+							
 			dao.closeConnection();	
 			getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
-			System.out.println("redirection accueil ok");
-		
+			System.out.println("redirection accueil ok");		
 		}	
-	
-	
-	
 	}
 
 	/**
