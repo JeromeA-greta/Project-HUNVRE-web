@@ -35,7 +35,7 @@ public class Partie extends HttpServlet {
 				+ "<html>"
 				+ "<head>"
 				+ "<meta charset=\"utf-8\"/> \r\n"
-				+ "<link rel='stylesheet' href='style.css'>"
+				+ "<link rel='stylesheet' href='partie.css'>"
 				+ "</head>"
 				+ "<body> <div id='partie'>"
 				+ "<table>"
