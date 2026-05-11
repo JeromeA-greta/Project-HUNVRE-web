@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@charset "UTF-8";
+
 /* Centrage horizontal des div + vertical via margin auto */
 
 
@@ -52,7 +54,7 @@ input[name='choix'] {
 
 /* Image de fond sur toute la page, texte blanc par défaut */
 body {
-    background-image: url("resources/images/accueil.jpg");
+	
     color: white;
     font-style: 'blur';
     font-family: 'blur', sans-serif;
@@ -102,15 +104,67 @@ body {
 
 /*ALLAN*/
 
-#fondprofil {
-
-}
 
 #tableauprofil {
     color: white;
     font-style: 'blur';
 }
 
+#case00 {
+	width : 17vw;
+	height : 29vh;
+	background-image: url("resources/images/lune.jpg");
+	background-size: cover;
+}
 
+#case01 {
+	background-image: url("resources/images/titre-hunvre.jpg");
+	width : 66vw;
+	height : 29vh;
+}
 
-/*FIN ALLAN*/
+#case02 {
+	width : 17vw;
+	height : 29vh;
+	background-image: url("resources/images/lune.jpg");
+	background-size: cover;
+}
+
+#case10 {
+	width : 17vw;
+	height : 42vh;
+}
+
+#case11 {
+	background-image: url("resources/images/bandomilieu4.jpg");
+
+	height : 42vh;
+}
+
+#case12 {
+	
+	width : 17vw;
+	height : 42vh;
+	
+}
+
+#case20 {
+	width : 17vw;
+	height : 29vh;
+	background-image: url("resources/images/lune.jpg");
+	background-size: cover;
+}
+
+#case21 {
+	width : 66vw;
+	height : 29vh;
+	background-image: url("resources/images/BandobaHunvre2.jpg");
+	background-size: cover;
+}
+
+#case22 {
+	width : 17vw;
+	height : 29vh;
+	background-image: url("resources/images/lune.jpg");
+	background-size: cover;
+}
