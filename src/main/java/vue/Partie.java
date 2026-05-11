@@ -39,9 +39,9 @@ public class Partie extends HttpServlet {
 				+ "</head>"
 				+ "<body> <div id='partie'>"
 				+ "<table>"
-				+ "<tr><td id='00'></td><td id='01'></td><td id='02'></td></tr>"
-				+ "<tr><td id='10'></td><td id='11'></td><td id='12'></td></tr>"
-				+ "<tr><td id='20'></td><td id='21'></td><td id='22'></td></tr>"
+				+ "<tr><td id='case00'>test</td><td id='case01'></td><td id='case02'></td></tr>"
+				+ "<tr><td id='case11' colspan='3'>test</td></tr>"
+				+ "<tr><td id='case20'>test</td><td id='case21'></td><td id='case22'></td></tr>"
 				+ "</table>"				
 				+ "</body>"
 				+ "</html>");
