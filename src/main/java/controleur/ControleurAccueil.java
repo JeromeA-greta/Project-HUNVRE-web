@@ -47,10 +47,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
             case "Quitter":
                 // Quitter (logout)
-                request.getSession().invalidate();
                 //response.sendRedirect("index.jsp");
                 //response.sendRedirect("/Connexion");
-                request.getRequestDispatcher("/Connexion");
+                request.getRequestDispatcher("/ControleurDeconnexion")
+                .forward(request, response);
                 break;
         }
     }
