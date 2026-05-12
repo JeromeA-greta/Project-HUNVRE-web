@@ -3,6 +3,7 @@ package vue;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import controleur.ControleurPartie;
 import jakarta.servlet.ServletException;
@@ -27,6 +28,8 @@ public class Partie extends HttpServlet {
 		HttpSession h = request.getSession(false);
 		Utilisateur joueur = (Utilisateur) h.getAttribute("joueur");
 		DeckJoueur deck = joueur.getDeck();
+		Collections.shuffle(deck);
+		System.out.println("Deck dans Partie : " +joueur.getDeck());
 		
 		if (h == null || h.getAttribute("joueur") == null) { //Si la session n'existe pas, renvoie vers la page de connexion
 		    response.sendRedirect("/Connexion");
@@ -48,8 +51,9 @@ public class Partie extends HttpServlet {
 				+ "<tr><td id='case20'>test</td>"
 				+ "<td id='case21'>");
 		for (int i = 1 ; i<=8 ; i++) {
-			out.print("<img src ='resources/images/1.jpg' alt='fail' />");
-			// deck.cherchercarte(i).getRecto()
+			
+			out.print("<img src ='resources/images/"+ deck.tiragecarte(i, deck).getRecto() +".jpg' alt='fail' />");
+			
 		}
 				
 				out.print("</td>"

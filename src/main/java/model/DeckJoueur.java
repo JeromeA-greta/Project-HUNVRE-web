@@ -9,24 +9,34 @@ public class DeckJoueur extends ArrayList {
 	
 	public DeckJoueur() {
 	
-			this.deck = new ArrayList<CarteJeu>();	
+		this.deck = new ArrayList<CarteJeu>();	
+		
 	}
 	
 	public ArrayList getListedeck() { 
-		return (ArrayList) this.deck;
+		return (ArrayList) deck;
 	}
-	/*public CarteJeu getCartedejeubyid(int id) {
-		Cartedejeu.getId();
-	}*/
-	
-	public CarteJeu cherchercarte(int id) {
-		for (CarteJeu carte : this.deck) {
-			if (carte.getId() == id) {
+
+	public CarteJeu cherchercarte(int id, ArrayList<CarteJeu> deck) {
+		for (CarteJeu carte : deck) {
+			if (String.valueOf(id).equals(carte.getRecto())) {			
 				return carte;
 			}
 		}
 		return null;
 	}
+	
+	public CarteJeu tiragecarte(int id, ArrayList<CarteJeu> deck) {
+		
+		return deck.get(id);
+	}
+	
+	/*public String chercherRectoCarte() {
+		String recto;
+		
+		
+		return recto;
+	}*/
 	
 	public void ajoutercarte(CarteJeu c) { // Surcharge de la méthode add() de ArrayList
 		this.add(c);
