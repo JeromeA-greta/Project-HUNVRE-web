@@ -2,6 +2,7 @@ package vue;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import controleur.ControleurPartie;
 import jakarta.servlet.ServletException;
@@ -10,6 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.CarteJeu;
+import model.DeckJoueur;
 import model.Utilisateur;
 
 @WebServlet("/Partie")
@@ -23,13 +26,14 @@ public class Partie extends HttpServlet {
 		
 		HttpSession h = request.getSession(false);
 		Utilisateur joueur = (Utilisateur) h.getAttribute("joueur");
+		DeckJoueur deck = joueur.getDeck();
 		
 		if (h == null || h.getAttribute("joueur") == null) { //Si la session n'existe pas, renvoie vers la page de connexion
 		    response.sendRedirect("/Connexion");
 		    return;
 		}
 		
-	//	ControleurPartie controleurpartie = new ControleurPartie();
+		ControleurPartie controleurpartie = new ControleurPartie();
 		
 		out.print("<!Doctype html>"
 				+ "<html>"
@@ -41,7 +45,15 @@ public class Partie extends HttpServlet {
 				+ "<table>"
 				+ "<tr><td id='case00'>test</td><td id='case01'></td><td id='case02'></td></tr>"
 				+ "<tr><td id='case11' colspan='3'>test</td></tr>"
-				+ "<tr><td id='case20'>test</td><td id='case21'></td><td id='case22'></td></tr>"
+				+ "<tr><td id='case20'>test</td>"
+				+ "<td id='case21'>");
+		for (int i = 1 ; i<=8 ; i++) {
+			out.print("<img src ='resources/images/1.jpg' alt='fail' />");
+			// deck.cherchercarte(i).getRecto()
+		}
+				
+				out.print("</td>"
+				+ "<td id='case22'></td></tr>"
 				+ "</table>"				
 				+ "</body>"
 				+ "</html>");

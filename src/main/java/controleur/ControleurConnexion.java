@@ -97,7 +97,9 @@ public class ControleurConnexion extends HttpServlet {
 	        							rsprofil.getString(3),
 	        							1,
 	        							rsprofil.getString(4)));
+	                			System.out.println();
 	                		}
+	                		System.out.println(joueur.getDeck());
 	                	h.setAttribute("joueur", joueur); // Place l'instance de Utilisateur "joueur" dans la variable de session h
 	                	} 
 	                	
