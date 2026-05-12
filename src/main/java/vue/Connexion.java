@@ -19,11 +19,11 @@ public class Connexion extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
 
-        response.setContentType("text/html"); // Dit au navigateur : ce que je t'envoie est du HTML
-        PrintWriter out = response.getWriter(); // Ouvre le flux d'écriture vers le navigateur
+	    response.setContentType("text/html");
+	    PrintWriter out = response.getWriter();
 
         // Récupérer le message d'erreur du controleurConnexion
         String erreur = (String) request.getAttribute("erreur");
@@ -37,8 +37,8 @@ public class Connexion extends HttpServlet {
                 + "</head>"
                 + "<body>"
 
-                    // --- Description ---
-                    + "<p>\"Un jeu inspiré de Balatro pour plonger dans les profondeurs du rêve lucide.\"</p>"
+	                // --- Description ---
+	                + "<p>\"Un jeu inspiré de Balatro pour plonger dans les profondeurs du rêve lucide.\"</p>"
 
                     // Afficher le message d'erreur
                     + (erreur !=null ? "<p style='color:red'>" + erreur + "</p>": "")
@@ -47,31 +47,37 @@ public class Connexion extends HttpServlet {
                     + "<form id='form-connexion' action='ControleurConnexion' method='POST'>"
                     + "<table id='table-connexion'>"
 
-                        // --- Ligne email ---
-                        + "<tr>"
-                        +     "<td><label>Adresse email :</label></td>"
-                        +     "<td><input id='input-email' type='email' name='labelEmail' placeholder='exemple@mail.com' /></td>"
-                        + "</tr>"
+	                    // --- Ligne email ---
+	                    + "<tr>"
+	                    +     "<td><label>Adresse email :</label></td>"
+	                    +     "<td><input type='email' name='labelEmail' placeholder='exemple@mail.com' /></td>"
+	                    + "</tr>"
 
-                        // --- Ligne mot de passe ---
-                        + "<tr>"
-                        +     "<td><label>Mot de passe :</label></td>"
-                        +     "<td><input id='input-mdp' type='password' name='mdp' placeholder='Votre mot de passe' /></td>"
-                        + "</tr>"
+	                    // --- Ligne mot de passe ---
+	                    + "<tr>"
+	                    +     "<td><label>Mot de passe :</label></td>"
+	                    +     "<td><input type='password' name='mdp' placeholder='Votre mot de passe' /></td>"
+	                    + "</tr>"
 
-                        // --- Ligne bouton connexion ---
-                        + "<tr>"
-                        +     "<td colspan='2'><button id='btn-connexion' type='submit' name='connexion'>Se connecter</button></td>"
-                        + "</tr>"
+	                    // --- Ligne bouton connexion ---
+	                    + "<tr>"
+	                    +     "<td></td>"
+	                    +     "<td><input type='submit' name='connexion' value='Se connecter'></td>"
+	                    + "</tr>"
 
-                    + "</table>"
-                    + "</form>"
+	                + "</table>"
+	                + "</form>"
 
-                    // --- Formulaire création de compte en GET - modif pauline 7/05/26 14:38 ---
-                    + "<form id='form-creation' action='CreationCompte' method='GET'>"
-                    +     "<button id='btn-creation' type='submit' name='creation'>Créer un compte</button>"
-                    + "</form>"
+	                // --- Formulaire création de compte en GET - modif pauline 7/05/26 14:38 ---
+	                + "<form action='CreationCompte' method='GET'>"
+	                + "<table>"
+	                +	"<tr>"
+	                +	  "<td></td>"
+	                +     "<td><input type='submit' name='creation' value='Créer un compte'></td>"
+	                +	"</tr>"
+	                + "</table>" 
+	                + "</form>"
 
-                + "</body></html>");
-    }
+	            + "</body></html>");
+	}
 }

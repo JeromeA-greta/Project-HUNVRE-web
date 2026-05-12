@@ -24,20 +24,18 @@ import connection.DAOAcces;
  */
 @WebServlet("/ControleurConnexion")
 public class ControleurConnexion extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    
+	private static final long serialVersionUID = 1L;    
     public static Utilisateur joueur ;
-
     /**
      * Contrôleur de connexion : gère les actions depuis la vue Connexion.
      * @see HttpServlet#HttpServlet()
      */
     public ControleurConnexion() {
         super();
-
         // TODO Auto-generated constructor stub
     }
-
+    
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
