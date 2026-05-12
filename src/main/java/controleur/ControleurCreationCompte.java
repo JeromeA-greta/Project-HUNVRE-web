@@ -14,6 +14,8 @@ import java.sql.SQLException;
 
 import connection.DAOAcces;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 @WebServlet("/ControleurCreationCompte")
 public class ControleurCreationCompte extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -79,11 +81,18 @@ public class ControleurCreationCompte extends HttpServlet {
     	    		PreparedStatement pstNouveauCompte = dao.getConn().prepareStatement(strInsertNouveauCompte);
     	    		
     	    		pstNouveauCompte.setString(1, pseudoCheck);
-    	    		pstNouveauCompte.setString(2, mdpCheck);
+    	    		// Génère un sel aléatoire, hache mdpCheck avec ce sel,
+    	    		// stocke le résultat (60 chars) dans mdpHache
+    	    		// (aucun rapport avec la MDPH 😇)
+    	    		String mdpHache = BCrypt.hashpw(mdpCheck, BCrypt.gensalt());
+    	    		// On met le hachis à la place du mdp
+    	    		pstNouveauCompte.setString(2, mdpHache);
     	    		pstNouveauCompte.setString(3, labelEmailCheck);
     	    		// J'ai écrit "joueur" en dur...
     	    		pstNouveauCompte.setString(4, "joueur");
-    	    		// Askip executeUpdate() c'est mieux pour un INSERT
+    	    		// Askip executeUpdate() c'est mieux pour
+    	    		// un INSERT, UPDATE et DELETE
+    	    		// car ce sont des modifications de données BDD
     	    		pstNouveauCompte.executeUpdate();
     	    		
     	    		dao.closeConnection();
