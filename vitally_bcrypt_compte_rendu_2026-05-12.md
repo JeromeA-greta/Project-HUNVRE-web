@@ -91,11 +91,9 @@ Mais Tomcat ne travaille pas directement sur le projet source. Il travaille sur 
 
 C'est là que vit la vraie appli qui tourne. Et le Clean+Restart d'Eclipse n'a pas copié le JAR dans ce dossier automatiquement sur ma machine.
 
-**La solution :** j'ai copié manuellement `jbcrypt-0.4.jar` dans le dossier `WEB-INF\lib` de la copie Tomcat.
+**La solution :** glisser-déposer `jbcrypt-0.4.jar` directement dans le dossier `WEB-INF/lib` depuis l'explorateur de fichiers vers Eclipse. Eclipse crée les liens sous-jacents automatiquement et refreshe — c'est la bonne façon de faire.
 
-⚠️ À retenir : quand on ajoute un JAR au projet, il faut le mettre dans **deux endroits** :
-1. `src/main/webapp/WEB-INF/lib/` (projet source, pour Eclipse)
-2. `tmp0\wtpwebapps\Project-HUNVRE-web\WEB-INF\lib\` (copie Tomcat, pour l'exécution)
+⚠️ À retenir : quand on ajoute un JAR au projet, il faut le mettre dans le **Build Path** (`.classpath`) ET le glisser-déposer dans `WEB-INF/lib` depuis l'explorateur vers Eclipse.
 
 ### 2. `com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data too long for column 'mdp' at row 1`
 
