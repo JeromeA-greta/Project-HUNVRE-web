@@ -42,10 +42,22 @@ public class Profil extends HttpServlet {
 				+ "</head>"
 				+ "<body> <div id='fondprofil'>"
 				+ "<h1 align=center>Profil utilisateur : </h1></br>"
-				+ "<div align='center'> <form action='ControleurDeconnexion' name='boutondeconnexion' method='get'> <input type ='submit' name='deconnexion' value='Se déconnecter'> </form></div><br>"
+				+ "<div align='center'> "
+				
+				// création bouton accueil aligné sur déconnexion 
+				+ "<div class='boutons'>"
 
-				+ "<table border align ='center'>"
-			//	+ "<form action='ControleurModifInfosProfil'>"
+				+ "<form action='Accueil' method='get'>"
+				+ "<input type='submit' value='Accueil'>"
+				+ "</form>"
+
+				+ "<form action='ControleurDeconnexion' method='get'>"
+				+ "<input type='submit' value='Se déconnecter'>"
+				+ "</form>"
+
+				+ "</div>"
+			
+				//	+ "<form action='ControleurModifInfosProfil'>"
 				+ "<tr><td>Pseudo : </td><td>"+joueur.getPseudo()+"</br></td></tr>"
 				+ "<tr><td>Adresse Mail : </td><td>"+joueur.getMail()+"</br></td></tr>"							
 				+ "<tr><td>Score max : </td><td>" +joueur.getScore()+ "</br></td></tr>"
