@@ -25,6 +25,9 @@ public class Connexion extends HttpServlet {
         response.setContentType("text/html"); // Dit au navigateur : ce que je t'envoie est du HTML
         PrintWriter out = response.getWriter(); // Ouvre le flux d'écriture vers le navigateur
 
+        // Récupérer le message d'erreur du controleurConnexion
+        String erreur = (String) request.getAttribute("erreur");
+       
         out.println("<!DOCTYPE html>"
                 + "<html lang='fr'>"
                 + "<head>"
@@ -37,6 +40,9 @@ public class Connexion extends HttpServlet {
                     // --- Description ---
                     + "<p>\"Un jeu inspiré de Balatro pour plonger dans les profondeurs du rêve lucide.\"</p>"
 
+                    // Afficher le message d'erreur
+                    + (erreur !=null ? "<p style='color:red'>" + erreur + "</p>": "")
+                    
                     // --- Formulaire connexion en POST ---
                     + "<form id='form-connexion' action='ControleurConnexion' method='POST'>"
                     + "<table id='table-connexion'>"
