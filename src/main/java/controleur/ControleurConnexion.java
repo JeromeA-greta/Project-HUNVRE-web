@@ -84,7 +84,8 @@ public class ControleurConnexion extends HttpServlet {
                    	chargerDeck(dao, identification);
 
                 	h.setAttribute("joueur", joueur); // Place l'instance de Utilisateur "joueur" dans la variable de session 
-                    redirectionOk = true;
+                	System.out.println(joueur.getDeck());
+                	redirectionOk = true;
 				}
 
 			} catch (SQLException e) {
@@ -114,20 +115,20 @@ public class ControleurConnexion extends HttpServlet {
 	private void chargerDeck(DAOAcces dao, ResultSet identification) throws SQLException {
 	    try {
 	    	PreparedStatement pstprofil = dao.getConn().prepareStatement(
-	        "SELECT * FROM carte;");
+	        "SELECT id_carte, valeur, recto, couleur FROM carte;");
 	    
 	    	ResultSet rsprofil = pstprofil.executeQuery();
 	    	
 	    	while (rsprofil.next()) {
 	    		joueur.getDeck().ajoutercarte(new CarteJeu(
-	    				rsprofil.getInt(1),
+	    			rsprofil.getInt(1),
 		            rsprofil.getInt(2),
 		            rsprofil.getString(3),
 		            1,
 		            rsprofil.getString(4)));
 	    		System.out.println("rsprofil" + rsprofil.getInt(1));
 		    }
-	    	System.out.println(joueur.getDeck());
+	    	//System.out.println(joueur.getDeck());
 	    } catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Pb connexion SQL charger deck");
