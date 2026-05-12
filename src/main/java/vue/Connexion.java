@@ -25,21 +25,27 @@ public class Connexion extends HttpServlet {
 	    response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
 
-	    out.println("<!DOCTYPE html>"
-	            + "<html lang='fr'>"
-	            + "<head>"
-	            +     "<meta charset='utf-8'>"
-	            +     "<link rel='stylesheet' href='style.css'>"
-	            +     "<title>HUNVRE Connexion</title>"
-	            + "</head>"
-	            + "<body>"
+        // Récupérer le message d'erreur du controleurConnexion
+        String erreur = (String) request.getAttribute("erreur");
+       
+        out.println("<!DOCTYPE html>"
+                + "<html lang='fr'>"
+                + "<head>"
+                +     "<meta charset='utf-8'>"
+                +     "<link rel='stylesheet' href='style.css'>"
+                +     "<title>HUNVRE Connexion</title>"
+                + "</head>"
+                + "<body>"
 
 	                // --- Description ---
 	                + "<p>\"Un jeu inspiré de Balatro pour plonger dans les profondeurs du rêve lucide.\"</p>"
 
-	                // --- Formulaire connexion en POST ---
-	                + "<form action='ControleurConnexion' method='POST'>"
-	                + "<table>"
+                    // Afficher le message d'erreur
+                    + (erreur !=null ? "<p style='color:red'>" + erreur + "</p>": "")
+                    
+                    // --- Formulaire connexion en POST ---
+                    + "<form id='form-connexion' action='ControleurConnexion' method='POST'>"
+                    + "<table id='table-connexion'>"
 
 	                    // --- Ligne email ---
 	                    + "<tr>"
