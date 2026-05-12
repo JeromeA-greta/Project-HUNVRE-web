@@ -5,6 +5,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.DeckJoueur;
+import model.Utilisateur;
+
 import java.io.IOException;
 import java.util.regex.Pattern;
 import java.sql.Connection;
@@ -96,6 +100,10 @@ public class ControleurCreationCompte extends HttpServlet {
     	    		pstNouveauCompte.executeUpdate();
     	    		
     	    		dao.closeConnection();
+    	    		
+    	    		HttpSession h = request.getSession();
+    	    		Utilisateur joueur = new Utilisateur(pseudoCheck, labelEmailCheck, new DeckJoueur(), "joueur");
+    	    		h.setAttribute("joueur", joueur);
     	    		
     	    		getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
                 }         
