@@ -3,7 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeckJoueur extends ArrayList {
+public class DeckJoueur extends ArrayList<CarteJeu> {
+	private static final long serialVersionUID = 1L;
 	
 	private List<CarteJeu> deck;
 	
