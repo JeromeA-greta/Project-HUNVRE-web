@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import connection.DAOAcces;
 
 /**
@@ -43,13 +45,16 @@ public class ControleurConnexion extends HttpServlet {
 		 
 			//récupére l'identifiant et le mot de passe entrés par l'utilisateur-ice dans la vue Connexion
 			String mailCheck = (String)request.getParameter("labelEmail");	
-			String mdpCheck = (String)request.getParameter("mdp"); 
+			String mdpSaisi = (String)request.getParameter("mdp");
+		
+			
+			//String mdpCheck
 			
 			//Test
 			System.out.println("controleur co instancié & le mail entré est : "+ mailCheck);
 			
 			//Si les champs sont vides, renvoie sur la vue Connexion (mais il manque l'affichage dans la vue Connewion d'un message d'erreur
-			if(mailCheck == null || mailCheck.trim().isEmpty() || mdpCheck == null || mdpCheck.trim().isEmpty())   {
+			if(mailCheck == null || mailCheck.trim().isEmpty() || mdpSaisi == null || mdpSaisi.trim().isEmpty())   {
 				request.setAttribute("erreur", "Veuillez remplir tous les champs");
 				getServletContext().getRequestDispatcher("/Connexion").forward(request, response);
 				System.out.println("Veuillez compléter tous les champs svp !");
@@ -61,15 +66,33 @@ public class ControleurConnexion extends HttpServlet {
 			try {	
 				//Ouvre la connexion
 				dao = new DAOAcces("com.mysql.cj.jdbc.Driver", "hunvre", "root", "");
+				PreparedStatement checkMdp = null;
 				PreparedStatement checkUser = null;
+								
+				String sqlcheck = "SELECT mdp FROM utilisateur WHERE mail = ? ;";
+				checkMdp = dao.getConn().prepareStatement(sqlcheck);
+				checkMdp.setString(1, mailCheck);
 				
-				String sql = "SELECT * FROM utilisateur WHERE mail = ? AND mdp = ?";
+				ResultSet verifMdp = checkMdp.executeQuery();
+				boolean checkmdp = false;
+				
+				// Extrait le sel du hash BDD, rehashe le mdp saisi, compare → retourne true ou false
+				if (verifMdp.next()) {
+					
+					checkmdp =  BCrypt.checkpw(mdpSaisi, verifMdp.getString("mdp"));
+					
+				}
+				
+				if (checkmdp == true) {
+				String sql = "SELECT * FROM utilisateur WHERE mail = ? ;";
 				checkUser = dao.getConn().prepareStatement(sql);
 				checkUser.setString(1, mailCheck);
-				checkUser.setString(2, mdpCheck);
+				
+
+				// checkUser.setString(2, mdpCheck);
 				ResultSet identification = checkUser.executeQuery();				
 				
-				if (identification.next()) {
+				while (identification.next()) {
 					
 					//Crée la variable de session h seulement si la requête d'identification renvoie un résultat positif
 					HttpSession h = request.getSession();  
@@ -85,7 +108,7 @@ public class ControleurConnexion extends HttpServlet {
                 	System.out.println(joueur.getDeck());
                 	redirectionOk = true;
 				}
-
+				}
 			} catch (SQLException e) {
 			    e.printStackTrace();
 			    System.out.println("Pb connexion SQL - connexion échoué");
@@ -96,7 +119,8 @@ public class ControleurConnexion extends HttpServlet {
 			        getServletContext().getRequestDispatcher("/Accueil").forward(request, response);
 			    } else {
 			    	request.setAttribute("erreur", "Identifiants incorrects !");
-			        getServletContext().getRequestDispatcher("/Connexion").forward(request, response);
+			        getServletContext().getRequestDispatcher("/Connexion").forward(request, response); //redirection buggé
+			        System.out.println("id incorrects");
 			    }
 			}
 	}
