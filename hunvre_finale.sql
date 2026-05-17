@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 12 mai 2026 à 12:50
+-- Généré le : dim. 17 mai 2026 à 12:23
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -114,9 +114,8 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id_utilisateur`, `pseudo`, `mdp`, `mail`, `role`, `blinde`, `score`) VALUES
-(1, 'a', 'a', 'a', 'admin', NULL, 786),
-(2, 'Pain', 'b', 'jean@pain.com', 'joueur', NULL, 284),
-(3, 'r', 'r', 'pain@pain.pain', 'joueur', NULL, NULL);
+(6, 'mich', '$2a$10$hS7Jl2fIZ2A25WHUVAdTzuFoLE36eH.4xJ3rgdHg.YGMlG/oHBi/q', 'mich@mich.com', 'joueur', NULL, NULL),
+(7, 'pain', '$2a$10$0GKxox1fUhZ4qXSJg7PEGeadkGYN8wVPBe1HGfVJ0Y1HZ7SnZWNM6', 'jean@pain.com', 'joueur', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,7 +172,7 @@ ALTER TABLE `carte`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id_utilisateur` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_utilisateur` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `visuel`
