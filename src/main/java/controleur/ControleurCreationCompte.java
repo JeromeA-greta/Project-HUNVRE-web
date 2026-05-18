@@ -22,7 +22,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet("/ControleurCreationCompte")
 public class ControleurCreationCompte extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;//Lorsqu'une classe implémente l'interface Serializable, Java génère automatiquement un serialVersionUID basé sur la structure de la classe
 
     // Vérifie que la chaîne correspond au pattern regex (je vais mettre cette méthode tout en bas quand j'aurais terminé de coder ce controleur)
     public boolean patternMatches(String userInput, String regexPattern) {
